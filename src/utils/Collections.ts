@@ -8,14 +8,14 @@ export class Collection<T> {
     remove(item: T): boolean {
         const index = this.items.indexOf(item);
         if (index > -1) {
-            this.items.splice(index, 1);
+            this.items.splice(index, 1); //removes that specific item from the array
             return true;
         }
         return false;
     }
     
-    find(predicate: (item: T) => boolean): T | undefined {
-        return this.items.find(predicate);
+    find(author: (item: T) => boolean): T | undefined {
+        return this.items.find(author);
     }
     
     getAll(): T[] {

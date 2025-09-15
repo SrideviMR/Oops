@@ -6,8 +6,8 @@ export class Magazine extends Item {
     private publishDate: Date;
     
     constructor(id: string, title: string, issueNumber: number, publisher: string, publishDate: Date) {
-        super(id, title);
-        this.issueNumber = issueNumber;
+        super(id, title); //polymorphism uses id, title from parent class Item
+        this.issueNumber = issueNumber; //initializing the properties of Magazine class
         this.publisher = publisher;
         this.publishDate = publishDate;
     }

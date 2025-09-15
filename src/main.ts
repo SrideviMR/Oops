@@ -25,6 +25,14 @@ function demonstrateLibrarySystem() {
         "978-0132350884",
         464
     );
+
+    const book3 = new Book(
+        LibraryUtils.generateItemId(),
+        "test 3",
+        "Clark Martin",
+        "978-0132350804",
+        678
+    );
     
     const magazine1 = new Magazine(
         LibraryUtils.generateItemId(),
@@ -36,12 +44,14 @@ function demonstrateLibrarySystem() {
     
     cityLibrary.addItem(book1);
     cityLibrary.addItem(book2);
+    cityLibrary.addItem(book3);
     cityLibrary.addItem(magazine1);
     
     const member1 = new Member(
         LibraryUtils.generateMemberId(),
-        "test user1",
-        "testuser1@email.com"
+        "testuser1@email.com",
+                "test user1",
+
     );
     console.log("Member1 ID:", member1);
     const member2 = new Member(
@@ -52,7 +62,8 @@ function demonstrateLibrarySystem() {
     
     cityLibrary.addMember(member1);
     cityLibrary.addMember(member2);
-    
+    const success = member1.borrowItem(book1);
+    console.log(`Borrowing book1 by member1 was ${success ? 'successful' : 'unsuccessful'}`);
     cityLibrary.displayAllItems();
     
     console.log("\n=== Search Results for 'TypeScript' ===");
@@ -70,12 +81,15 @@ function demonstrateLibrarySystem() {
     const bookCollection = new Collection<Book>();
     bookCollection.add(book1);
     bookCollection.add(book2);
-    
+    bookCollection.add(book3);
+        console.log(`Total books in collection before remove: ${bookCollection.count()}`);
+    bookCollection.remove(book3);
+
     const foundBook = bookCollection.find(book => book.getAuthor().includes("Martin"));
     if (foundBook) {
         console.log(`Found book by Martin: ${foundBook.getTitle()}`);
     }
-    
+console.log('All items in the collection:', bookCollection.getAll());
     console.log(`Total books in collection: ${bookCollection.count()}`);
 }
 

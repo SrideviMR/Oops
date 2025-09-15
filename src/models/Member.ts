@@ -11,7 +11,7 @@ export class Member {
         this.id = id;
         this.name = name;
         this.email = email;
-    }
+}
     
     getId(): string {
         return this.id;
