@@ -1,136 +1,190 @@
-# OOP Concepts Project
+# 📚 Library Management System -- TypeScript (OOP Implementation)
 
-## Overview
-This project is a standalone TypeScript application built to practice **Object-Oriented Programming (OOP) principles**, including **encapsulation, inheritance, abstraction, and modular class design**. The goal is to develop clean, reusable, and maintainable code while applying best practices.
+## 📌 Overview
 
----
+This project is a Library Management System built using TypeScript to
+demonstrate strong Object-Oriented Programming principles, clean
+architecture, and domain modeling.
 
-## Architecture & Flow
+The system allows: - Adding books and magazines - Registering members -
+Borrowing and returning items - Enforcing borrowing restrictions
 
-```mermaid
-flowchart TD
-    A[User / Client] --> B[Main Program]
-    B --> C[Base Class]
-    C --> D[Derived Classes / Inheritance]
-    B --> E[Modules]
-    E --> F[Reusable Classes / Methods]
-    D --> G[Business Logic / Operations]
-    G --> H[Output / Console Display]
+This project focuses on clean code, modularity, and business rule
+enforcement rather than UI or database integration.
+
+------------------------------------------------------------------------
+
+# 🏗️ Architecture Overview
+
+The project follows a layered object-oriented architecture:
+
+Library (Coordinator / Facade) │ ├── Members (Borrow Logic) │ └── Items
+├── Book └── Magazine
+
+Core Components:
+
+-   Library → Coordinates operations
+-   LibraryItem → Abstract base class
+-   Book → Extends LibraryItem
+-   Magazine → Extends LibraryItem
+-   Member → Handles borrowing rules
+
+------------------------------------------------------------------------
+
+# 🔄 System Flow
+
+Borrow Flow:
+
+1.  Library.borrow(itemId, memberId) is called
+2.  Library fetches item and member
+3.  Request delegated to Member.borrowItem()
+4.  Member checks:
+    -   Borrow limit
+    -   Item availability
+5.  If valid → item.checkOut() executed
+6.  Item marked unavailable
+
+------------------------------------------------------------------------
+
+# 🧠 OOP Concepts Implemented (From This Codebase)
+
+## 1️⃣ Abstraction
+
+abstract class LibraryItem defines shared structure. Derived classes
+must implement getDetails().
+
+## 2️⃣ Inheritance
+
+Base Class: - LibraryItem
+
+Derived Classes: - Book extends LibraryItem - Magazine extends
+LibraryItem
+
+## 3️⃣ Encapsulation
+
+Private properties protect internal state:
+
+-   maxBorrowLimit
+-   borrowedItems
+-   isAvailable
+
+Validation happens inside class methods, not externally.
+
+## 4️⃣ Polymorphism
+
+Both Book and Magazine implement getDetails(), allowing the system to
+treat all as LibraryItem while preserving specific behavior.
+
+------------------------------------------------------------------------
+
+# 🔒 Borrow Restriction Logic
+
+Borrowing is restricted using:
+
+1.  Borrow Limit Restriction
+
+Each member has:
+
+private maxBorrowLimit = 5
+
+Borrow allowed only if borrowedItems.length \< maxBorrowLimit
+
+2.  Item Availability Restriction
+
+Each item maintains:
+
+private isAvailable = true
+
+Borrow only succeeds if item.checkOut() returns true.
+
+Business logic is implemented inside Member.borrowItem(), ensuring
+proper separation of concerns.
+
+------------------------------------------------------------------------
+
+# 🎯 Design Principles Applied
+
+✔ Single Responsibility Principle\
+✔ Separation of Concerns\
+✔ Clean Domain Modeling\
+✔ Modular and Maintainable Structure
+
+------------------------------------------------------------------------
+
+# 📊 Architecture Diagram (Mermaid)
+
+``` mermaid
+classDiagram
+
+class Library {
+  +addItem()
+  +registerMember()
+  +borrow()
+  +returnItem()
+}
+
+class LibraryItem {
+  <<abstract>>
+  #id
+  #title
+  +getDetails()
+  +checkOut()
+  +returnItem()
+}
+
+class Book {
+  -author
+  +getDetails()
+}
+
+class Magazine {
+  -issueNumber
+  +getDetails()
+}
+
+class Member {
+  -borrowedItems
+  -maxBorrowLimit
+  +borrowItem()
+  +returnItem()
+  +canBorrow()
+}
+
+Library --> Member
+Library --> LibraryItem
+LibraryItem <|-- Book
+LibraryItem <|-- Magazine
+Member --> LibraryItem
 ```
 
-**Flow Description:**
-1. User interacts with the main program.
-2. Main program uses base and derived classes to implement logic.
-3. Classes are modular and reusable, demonstrating encapsulation and abstraction.
-4. Methods perform specific operations and return outputs.
-5. The program prints or displays results to the console.
+------------------------------------------------------------------------
 
----
+# 🚀 How to Run
 
-## Key Concepts Applied
+1.  Install dependencies
 
-### 1. Base Class
-A **base class** (also called parent class or superclass) is a class that contains common properties and methods that can be shared by other classes.
-
-Example concept:
-- Defines common attributes.
-- Provides reusable methods.
-- Acts as a blueprint for derived classes.
-
-### 2. Derived Class
-A **derived class** (also called child class or subclass) extends a base class and inherits its properties and methods.
-
-Key Points:
-- Uses `extends` keyword in TypeScript.
-- Can reuse base class functionality.
-- Can override or add new methods.
-
-### 3. Encapsulation
-**Encapsulation** means restricting direct access to certain parts of an object and controlling how data is accessed or modified.
-
-How it is achieved:
-- Using `private`, `public`, and `protected` access modifiers.
-- Exposing data through getter and setter methods.
-
-Why it matters:
-- Protects data integrity.
-- Prevents unintended modifications.
-- Improves maintainability.
-
-### 4. Inheritance
-**Inheritance** allows a class to acquire properties and behaviors from another class.
-
-Benefits:
-- Code reusability.
-- Reduced duplication.
-- Clear hierarchical structure.
-
-### 5. Abstraction
-**Abstraction** means hiding implementation details and exposing only essential functionality.
-
-How it is achieved:
-- Using abstract classes or interfaces.
-- Defining method signatures without exposing internal logic.
-
-Why it matters:
-- Reduces complexity.
-- Improves scalability.
-- Makes code easier to extend.
-
-### 6. Polymorphism
-**Polymorphism** allows methods to behave differently based on the object that calls them.
-
-Types:
-- Method overriding (same method name, different implementation).
-- Method overloading (same method name, different parameters).
-
-Why it matters:
-- Increases flexibility.
-- Enables dynamic behavior.
-
----
-
-## Features
-- Practice OOP principles in TypeScript.
-- Modular, reusable, and maintainable code.
-- Easy to extend with new classes and features.
-- Demonstrates separation of concerns and clean design.
-
----
-
-## Installation & Usage
-1. Clone the repository:
-```bash
-git clone https://github.com/SrideviMR/Oops.git
-```
-2. Navigate to the project directory:
-```bash
-cd Oops
-```
-3. Install dependencies:
-```bash
 npm install
-```
-4. Build the TypeScript project:
-```bash
-npm run build
-```
-5. Run the program:
-```bash
-npm start
-```
-6. Observe the outputs in the console.
 
----
+2.  Compile TypeScript
 
-## Learnings
-- Applying OOP principles in a practical project.
-- Designing modular and reusable TypeScript classes.
-- Understanding inheritance and abstraction in depth.
-- Writing clean code with separation of concerns.
-- Structuring a project for scalability and maintainability.
+npx tsc
 
----
+3.  Run
 
-## GitHub
-[OOP Concepts Project Repository](https://github.com/SrideviMR/Oops)
+node dist/index.js
+
+------------------------------------------------------------------------
+
+# 📌 Key Takeaways
+
+This project demonstrates:
+
+-   Strong OOP fundamentals
+-   Business rule enforcement
+-   Encapsulation and abstraction
+-   Clean architecture principles
+-   Scalable design structure
+
+It serves as a foundational backend domain modeling project in
+TypeScript.
+https://github.com/SrideviMR/Oops
