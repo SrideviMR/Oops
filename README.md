@@ -28,11 +28,65 @@ flowchart TD
 ---
 
 ## Key Concepts Applied
-- **Encapsulation**: Private and public members to protect data.
-- **Inheritance**: Derived classes extend base classes to reuse code.
-- **Abstraction**: Classes and methods hide internal implementation details.
-- **Modular Design**: Code organized into separate files and modules.
-- **Clean Code**: Meaningful naming, separation of concerns, and readability.
+
+### 1. Base Class
+A **base class** (also called parent class or superclass) is a class that contains common properties and methods that can be shared by other classes.
+
+Example concept:
+- Defines common attributes.
+- Provides reusable methods.
+- Acts as a blueprint for derived classes.
+
+### 2. Derived Class
+A **derived class** (also called child class or subclass) extends a base class and inherits its properties and methods.
+
+Key Points:
+- Uses `extends` keyword in TypeScript.
+- Can reuse base class functionality.
+- Can override or add new methods.
+
+### 3. Encapsulation
+**Encapsulation** means restricting direct access to certain parts of an object and controlling how data is accessed or modified.
+
+How it is achieved:
+- Using `private`, `public`, and `protected` access modifiers.
+- Exposing data through getter and setter methods.
+
+Why it matters:
+- Protects data integrity.
+- Prevents unintended modifications.
+- Improves maintainability.
+
+### 4. Inheritance
+**Inheritance** allows a class to acquire properties and behaviors from another class.
+
+Benefits:
+- Code reusability.
+- Reduced duplication.
+- Clear hierarchical structure.
+
+### 5. Abstraction
+**Abstraction** means hiding implementation details and exposing only essential functionality.
+
+How it is achieved:
+- Using abstract classes or interfaces.
+- Defining method signatures without exposing internal logic.
+
+Why it matters:
+- Reduces complexity.
+- Improves scalability.
+- Makes code easier to extend.
+
+### 6. Polymorphism
+**Polymorphism** allows methods to behave differently based on the object that calls them.
+
+Types:
+- Method overriding (same method name, different implementation).
+- Method overloading (same method name, different parameters).
+
+Why it matters:
+- Increases flexibility.
+- Enables dynamic behavior.
 
 ---
 
