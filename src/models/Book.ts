@@ -24,27 +24,3 @@ export class Book extends Item {
         return `Book: ${this.title} by ${this.author} (ISBN: ${this.isbn}, ${this.pages} pages)`;
     }
 }
-
-class Test {
-    test() {
-        console.log("Testing Book class...");
-    }
-     testing = new Test();
-}
-class Test1 extends Test {
-    test() { //overridding
-    console.log("Testing Book class extended...");
-    }
-}
-
-const testing1 = new Test1();
-testing1.test();
-
-
-class Add { //overloading 
-    add(a: number, b: number): number; //function overloading
-    add(a: string, b: string): string;
-    add(a: any, b: any): any {
-        return a + b;
-    }   
-}
