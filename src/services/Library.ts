@@ -3,7 +3,7 @@ import { Borrowable } from '../interfaces/borrowable';
 import { Item } from '../models/Item';
 import { Member } from '../models/Member';
 
-export class Library implements Searchable, Borrowable {
+export class Library implements Searchable, Borrowable { //using interface like Searchable, Borrowable
     private items: Map<string, Item> = new Map();
     private members: Map<string, Member> = new Map();
     private name: string;
